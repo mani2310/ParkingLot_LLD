@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import main.java.com.constants.ParkingLotConstants;
 import main.java.com.processor.CommandProcessor;
 import main.java.com.validations.InputValidator;
 
@@ -21,7 +22,7 @@ public class InteractiveMode implements Mode{
 	      {
 	    	  String[] input = inputLine.split(" ");
 	    	  new CommandProcessor().processCommand(input);
-	    	  if (input.equals("exit")) {
+	    	  if (input.equals(ParkingLotConstants.EXIT)) {
 	    		  break;
 	    	  }
 	    }

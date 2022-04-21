@@ -1,50 +1,49 @@
 package main.java.com.processor;
 
-import main.java.com.models.ParkingLot;
+import main.java.com.constants.ParkingLotConstants;
 import main.java.com.models.Vehicle;
 import main.java.com.service.ParkingLotService;
-import main.java.com.strategy.ParkingOrder;
 
 public class CommandProcessor {
+	ParkingLotService parkingLotService = new ParkingLotService();
 	
 	public void processCommand(String[] input)
 	{
 		String command = input[0];
-		if(command.equals("create_parking_lot"))
+		if(command.equals(ParkingLotConstants.CREATE_PARKING_LOT))
 		{
 		int parkingLotCapacity = Integer.parseInt(input[1]);
-		ParkingLot parkingLot = new ParkingLot(parkingLotCapacity);
-	    new ParkingLotService().createParkingSlot(parkingLot,parkingLotCapacity,new ParkingOrder());
+		parkingLotService.createParkingSlot(parkingLotCapacity);
 		}
-		else if(command.equals("park"))
+		else if(command.equals(ParkingLotConstants.PARK))
 		{
 			String regNumber = input[1];
 			String color = input[2];
-			new ParkingLotService().parkVehicle(new Vehicle(regNumber,color));
+			parkingLotService.parkVehicle(new Vehicle(regNumber,color));
 		}
-		else if(command.equals("leave"))
+		else if(command.equals(ParkingLotConstants.LEAVE))
 		{
 			Integer slotNumber = Integer.parseInt(input[1]);
-			new ParkingLotService().removeEmptySlot(slotNumber);
+			parkingLotService.removeEmptySlot(slotNumber);
 		}
-		else if(command.equals("status"))
+		else if(command.equals(ParkingLotConstants.STATUS))
 		{
-			new ParkingLotService().getSlotStatus();
+			parkingLotService.getSlotStatus();
 		}
-		else if(command.equals("registration_numbers_for_cars_with_colour"))
-		{
-			String color = input[1];
-			new ParkingLotService().getRegistrationNumberByColor(color);
-		}
-		else if(command.equals("slot_numbers_for_cars_with_colour"))
+		else if(command.equals(ParkingLotConstants.REG_NUMBER_FOR_CARS_WITH_COLOR))
 		{
 			String color = input[1];
-			new ParkingLotService().getSlotNumbersByColor(color);
+			parkingLotService.getRegistrationNumberByColor(color);
 		}
-		else if(command.equals("slot_number_for_registration_number"))
+		else if(command.equals(ParkingLotConstants.SLOT_NUMBERS_FOR_CARS_WITH_COLOR))
+		{
+			String color = input[1];
+			parkingLotService.getSlotNumbersByColor(color);
+		}
+		else if(command.equals(ParkingLotConstants.SLOT_NUMBER_FOR_REGISTATION_NUMBER))
 		{
 			String registrationNumber = input[1];
-			new ParkingLotService().getSlotNumberByRegNumber(registrationNumber);
+			parkingLotService.getSlotNumberByRegNumber(registrationNumber);
 		}
 	}
 

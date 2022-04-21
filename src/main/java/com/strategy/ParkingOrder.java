@@ -4,28 +4,25 @@ import java.util.TreeSet;
 
 public class ParkingOrder implements ParkingStrategy{
 	
-	TreeSet<Integer> slotList;
-	
-	public ParkingOrder()
-	{
-		slotList = new TreeSet<>();
-	}
+	public static TreeSet<Integer> slotList = new TreeSet<>();
 
 	@Override
 	public void addSlot(Integer slotNumber) {
 		
-		this.slotList.add(slotNumber);
+		ParkingOrder.slotList.add(slotNumber);
 	}
 
 	@Override
 	public void removeSlot(Integer slotNumber) {
 	
-		this.slotList.remove(slotNumber);
+		ParkingOrder.slotList.remove(slotNumber);
 	}
 
 	@Override
 	public Integer getNextSlot() {
-	 return this.slotList.first();
+	 if(ParkingOrder.slotList.isEmpty())
+		 return -1;
+	 return ParkingOrder.slotList.first();
 	}
 
 }
